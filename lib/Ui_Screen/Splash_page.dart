@@ -1,8 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_full_app/Ui_Screen/My_Ui_Page.dart';
+import 'package:todo_full_app/Ui_Screen/Ui_page_not_using_bloc.dart';
 import 'package:todo_full_app/onboarding/Login_page.dart';
 
 class Splash_screen extends StatefulWidget {
@@ -23,7 +25,7 @@ class _Splash_screenState extends State<Splash_screen> {
       if (uid != null && uid.isNotEmpty) {
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) {
-          return My_Ui_Page(id: uid!);
+          return My_page();
         }));
       } else {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -36,14 +38,16 @@ class _Splash_screenState extends State<Splash_screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        color: Colors.blue.shade500,
-        child: Icon(
-          Icons.check,
-          size: 50,
-          color: Colors.white,
+      body: Center(
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          color: Color(0xff157180),
+          child: Icon(
+            Icons.check,
+            size: 50,
+            color: Colors.white,
+          ),
         ),
       ),
     );

@@ -3,15 +3,24 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_full_app/Ui_Screen/My_Ui_Page.dart';
+import 'package:todo_full_app/Ui_Screen/Ui_page_not_using_bloc.dart';
 import 'package:todo_full_app/onboarding/Sighnup_page.dart';
 
 import '../Costum_widget/costum_widget.dart';
 
-class LoginPage extends StatelessWidget {
-//  const LoginPage({super.key});
+class LoginPage extends StatefulWidget {
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
 
+class _LoginPageState extends State<LoginPage> {
+//  const LoginPage({super.key});
   var emailControler = TextEditingController();
+
   var passControler = TextEditingController();
+
+  bool hidePasswod = true;
+
   var mFormKey = GlobalKey<FormState>();
 
   @override
@@ -45,7 +54,7 @@ class LoginPage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
-                    height: MediaQuery.sizeOf(context).height * 0.07,
+                    height: MediaQuery.of(context).size.height * 0.07,
                     decoration: BoxDecoration(boxShadow: [
                       BoxShadow(
                           color: Colors.grey.withOpacity(0.5),
@@ -93,9 +102,18 @@ class LoginPage extends StatelessWidget {
                         }
                       },
                       myIcon: Icon(Icons.key),
-                      suffIcon: Icon(Icons.remove_red_eye),
+                      suffIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              hidePasswod = !hidePasswod;
+                            });
+                          },
+                          icon: Icon(hidePasswod
+                              ? Icons.visibility_off
+                              : Icons.visibility)),
                       hintText: "enter your pass",
                       content: "pass",
+                      obscureText: hidePasswod,
                       controller: passControler,
                     ),
                   ),
@@ -124,9 +142,7 @@ class LoginPage extends StatelessWidget {
 
                               Navigator.pushReplacement(context,
                                   MaterialPageRoute(builder: (context) {
-                                return My_Ui_Page(
-                                  id: loginId,
-                                );
+                                return My_page();
                               }));
                             } on FirebaseAuthException catch (e) {
                               if (e.code == 'weak-password') {

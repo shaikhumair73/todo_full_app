@@ -119,7 +119,7 @@ class Sighn_page extends StatelessWidget {
                         }
                       },
                       myIcon: Icon(Icons.key),
-                      suffIcon: Icon(Icons.remove_red_eye),
+                      suffIcon: IconButton(onPressed: (){}, icon: Icon(Icons.visibility)),
                       hintText: "enter your pass",
                       content: "pass",
                       controller: passControler,

@@ -5,8 +5,9 @@ class MyTextFeild extends StatelessWidget {
   String content;
   TextEditingController controller;
   Icon myIcon;
-  Icon? suffIcon;
+  IconButton? suffIcon;
   final String? Function(String? value) validater;
+  bool obscureText;
 
   MyTextFeild(
       {required this.hintText,
@@ -14,11 +15,13 @@ class MyTextFeild extends StatelessWidget {
       required this.controller,
       required this.myIcon,
       this.suffIcon,
-      required this.validater});
+      required this.validater,
+      this.obscureText = false});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      obscureText: obscureText,
       controller: controller,
       validator: validater,
       decoration: InputDecoration(
